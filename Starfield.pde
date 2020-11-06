@@ -1,7 +1,8 @@
-Particle[] pop = new Particle[2200];
+Particle[] pop = new Particle[2000];
 void setup()
 {
  size(500,500);
+ smooth();
  noStroke();
  background(255);
  for(int i = 0; i <pop.length; i++)
@@ -12,7 +13,7 @@ void setup()
 }
 void draw()
 {
-
+  
   {
     background(0);
   }
@@ -31,6 +32,7 @@ void mousePressed()
     {
       pop[i].mySpeed*=-1;
     }
+    redraw();
   } 
 }
 
@@ -38,14 +40,15 @@ void mousePressed()
 class Particle
 {
   double myX,myY,myAngle,mySpeed;
-  int myColor;
+  int myRed, myBlue;
   Particle()
   {
     myX = 250;
     myY = 250;
     myAngle = (Math.random()*2*Math.PI);
-    mySpeed = (Math.random()*10);
-    myColor = (int)(Math.random()*76)+180;
+    mySpeed = (Math.random()*5)+5;
+    myRed = (int)(Math.random()*76)+180;
+    myBlue =(int)(Math.random()*76)+180;
   }
   void move()
   {
@@ -60,7 +63,7 @@ class Particle
   }
   void show()
   {
-    fill(myColor,0,0);
+    fill(myRed,0,myBlue);
     ellipse((float)myX,(float)myY,5,5);
   }
 }
@@ -72,7 +75,7 @@ class OddballParticle extends Particle
     myX = 250;
     myY = 250;
     mySpeed = (Math.random()*10);
-    myColor = (int)(Math.random()*76)+180;
+    myRed = (int)(Math.random()*76)+180;
  }
  void move()
  {
@@ -81,7 +84,7 @@ class OddballParticle extends Particle
  }
  void show()
   {
-    fill(0,myColor,0);
+    fill(myBlue,0,myRed);
     ellipse((float)myX,(float)myY,25,25);
   }
 }
