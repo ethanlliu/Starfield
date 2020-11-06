@@ -2,9 +2,8 @@ Particle[] pop = new Particle[2200];
 void setup()
 {
  size(500,500);
-  smooth();
-  noStroke();
-  background(255);
+ noStroke();
+ background(255);
  for(int i = 0; i <pop.length; i++)
   {
     pop[i] = new Particle();
@@ -13,7 +12,10 @@ void setup()
 }
 void draw()
 {
-  background(20,20,20);
+
+  {
+    background(0);
+  }
   for(int i = 0; i <pop.length; i++)
   {
     pop[i].move();
@@ -21,6 +23,17 @@ void draw()
    
   }
 }
+void mousePressed()
+{
+ if(mouseButton == LEFT)
+  {
+    for(int i = 0; i < pop.length; i++)
+    {
+      pop[i].mySpeed*=-1;
+    }
+  } 
+}
+
 
 class Particle
 {
@@ -38,6 +51,11 @@ class Particle
   {
     myX=myX+Math.cos(myAngle)*mySpeed;
     myY=myY+Math.sin(myAngle)*mySpeed;
+     if(myX > 600 || myX < -100 || myY > 600 ||myY < -100  )
+    {
+      myX = 250;
+      myY = 250;
+    }
 
   }
   void show()
@@ -58,8 +76,8 @@ class OddballParticle extends Particle
  }
  void move()
  {
-    myY = myY +(int)(Math.random()*6)-3;
-    myX = myX +(int)(Math.random()*6)-3;
+    myY = myY +(int)(Math.random()*mySpeed)-3;
+    myX = myX +(int)(Math.random()*mySpeed)-3;
  }
  void show()
   {
